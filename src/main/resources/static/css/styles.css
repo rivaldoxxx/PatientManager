@@ -1,0 +1,236 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+/* Stylizacja tabeli */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Stylizacja przycisków */
+.add-button, .home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-button:hover, .home-button:hover {
+    background-color: #45a049;
+}
+
+/* Stylizacja formularza */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+a.back-button {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-size: 16px;
+}
+
+a.back-button:hover {
+    color: #45a049;
+}
+
+/* Stylizacja strony startowej (home.html) */
+.home-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-section h2 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.home-section p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.home-section a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.home-section a:hover {
+    background-color: #45a049;
+}
+
+/* Stylizacja kontenera na stronę startową */
+.home-container {
+    text-align: center;
+    padding: 40px;
+}
+.logo {
+    width: 200px;  /* Ustaw szerokość */
+    height: auto;  /* Zachowaj proporcje */
+}
+
+.home-container h1 {
+    color: #4CAF50;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.home-container p {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 40px;
+}
+.forms {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.login-section, .registration-section {
+    background-color: #F4FDFD;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #008080;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    background-color: #E6F9FA;
+}
+
+.btn {
+    background-color: #008080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 80%;
+    margin-top: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #007070;
+}
+
+.home-section h2, .home-section p, .home-container h1, .home-container p {
+    color: #008080;
+}
