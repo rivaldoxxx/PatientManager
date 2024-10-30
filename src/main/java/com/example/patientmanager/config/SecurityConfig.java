@@ -48,7 +48,8 @@ public class SecurityConfig {
                         "/swagger-ui/**",
                         "/swagger-ui.html",
                         "/styles.css",
-                        "/error"
+                        "/error",
+                        "/images/**"
                         /*"/doctors/**",
                         "/patients/**"*/
                 ).permitAll()
