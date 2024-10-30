@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły Pacjenta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/patient-details.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Szczegóły Pacjenta</h1>
+
+    <div class="patient-details">
+        <p><strong>Imię:</strong> <span th:text="${patient.firstName}">Imię</span></p>
+        <p><strong>Nazwisko:</strong> <span th:text="${patient.lastName}">Nazwisko</span></p>
+        <p><strong>Data urodzenia:</strong> <span th:text="${patient.birthDate}">Data urodzenia</span></p>
+    </div>
+
+    <h2>Ostatnie wizyty</h2>
+    <div class="visits-list">
+        <table>
+            <thead>
+            <tr>
+                <th>Data wizyty</th>
+                <th>Powód wizyty</th>
+                <th>Notatki</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="visit : ${visits}">
+                <td th:text="${#temporals.format(visit.visitDate, 'yyyy-MM-dd HH:mm')}">Data wizyty</td>
+                <td th:text="${visit.visitReason}">Powód wizyty</td>
+                <td th:text="${visit.notes}">Notatki</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/patients" class="back-button">Powrót do listy pacjentów</a>
+</div>
+</body>
+</html>

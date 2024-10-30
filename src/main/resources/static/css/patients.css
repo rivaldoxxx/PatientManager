@@ -25,10 +25,12 @@ h1 {
     color: #4CAF50;
     font-size: 28px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .search-form {
     display: flex;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -49,7 +51,13 @@ h1 {
     border-radius: 0 8px 8px 0;
     cursor: pointer;
     font-size: 16px;
+    display: flex;
+    align-items: center;
     transition: background-color 0.3s ease;
+}
+
+.search-button i {
+    margin-right: 8px;
 }
 
 .search-button:hover {
@@ -97,7 +105,13 @@ tr:hover {
     color: white;
     text-decoration: none;
     border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
     transition: background-color 0.3s ease;
+}
+
+.details-button i {
+    margin-right: 5px;
 }
 
 .details-button:hover {

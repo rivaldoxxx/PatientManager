@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Błąd</title>
+</head>
+<body>
+<h1>Wystąpił błąd</h1>
+<p>Przepraszamy, ale nie możemy spełnić tego żądania.</p>
+<p th:text="${status} + ' ' + ${error}"></p>
+<p th:text="${message}"></p>
+<a href="/">Wróć do strony głównej</a>
+</body>
+</html>

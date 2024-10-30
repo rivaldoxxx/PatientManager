@@ -1,4 +1,7 @@
 package com.example.patientmanager.entities;
 
-public class Gender {
+public enum Gender {
+    MALE,
+    FEMALE,
+    OTHER
 }

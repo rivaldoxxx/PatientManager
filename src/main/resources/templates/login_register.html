@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="/css/login_register.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="images/LogoPatientManager.png" alt="Medical Logo" class="logo">
+        <h2>Login</h2>
+        <h2>Registration</h2>
+    </div>
+
+    <div class="forms">
+        <!-- Sekcja logowania -->
+        <div class="login-section">
+            <input type="text" id="login-username" placeholder="Username" class="input">
+            <input type="password" id="login-password" placeholder="Password" class="input">
+            <button class="btn login" onclick="login()">Login</button>
+        </div>
+
+        <!-- Sekcja rejestracji -->
+        <div class="registration-section">
+            <input type="text" id="register-username" placeholder="Username" class="input">
+            <input type="password" id="register-password" placeholder="Password" class="input">
+            <button class="btn register" onclick="register()">Register</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Funkcja rejestracji użytkownika
+    async function register() {
+        const username = document.getElementById('register-username').value;
+        const password = document.getElementById('register-password').value;
+
+        try {
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, role: 'ADMIN' })  // lub inna rola, jeśli wymagana
+            });
+
+            if (response.ok) {
+                alert("Registration successful!");
+                console.log("User registered successfully:", username);
+                window.location.href = '/';
+            } else {
+                const errorData = await response.json();
+                console.error("Registration failed:", errorData);
+                alert(`Registration failed: ${errorData.message || "Try again."}`);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred during registration.");
+        }
+    }
+
+    // Funkcja logowania użytkownika
+    async function login() {
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+
+        try {
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('jwtToken', data.token);
+                console.log("Login successful, JWT token saved:", data.token);
+                alert("Login successful!");
+                window.location.href = '/home';
+            } else {
+                console.error("Login failed for user:", username);
+                alert("Login failed. Check your credentials.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred during login.");
+        }
+    }
+
+    // Funkcja wylogowania użytkownika
+    function logout() {
+        localStorage.removeItem('jwtToken');
+        console.log("User logged out. Token removed.");
+        alert("Logged out successfully!");
+        window.location.href = '/'; // Przekierowanie na stronę główną po wylogowaniu
+    }
+
+    // Funkcja do wysyłania żądań z tokenem JWT
+    async function fetchWithAuth(url, options = {}) {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            alert("You are not logged in!");
+            window.location.href = '/';
+            return;
+        }
+
+        const headers = {
+            ...options.headers,
+            'Authorization': `Bearer ${token}`
+        };
+
+        const response = await fetch(url, {
+            ...options,
+            headers: headers
+        });
+
+        if (response.ok) {
+            return response.json();
+        } else {
+            if (response.status === 403) {
+                alert("Access denied: Unauthorized.");
+            }
+            throw new Error('Error: ' + response.statusText);
+        }
+    }
+
+    // Przykład użycia fetchWithAuth
+    /*async function getPatients() {
+        try {
+            const data = await fetchWithAuth('/patients/api');
+            console.log(data); // Wyświetl dane pacjentów w konsoli lub dodaj je do widoku
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }*/
+</script>
+</body>
+</html>

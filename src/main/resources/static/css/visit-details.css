@@ -1,0 +1,33 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: #45a049;
+}

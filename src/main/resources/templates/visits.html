@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Wizyt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/visits.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Lista Wizyt</h1>
+
+    <!-- Formularz wyszukiwania wizyt -->
+    <form action="#" method="get" class="search-form">
+        <input type="text" name="keyword" placeholder="Wyszukaj wizyty" id="search-input">
+
+        <button type="button" class="search-button" onclick="searchVisit()">
+            <i class="fas fa-search"></i> Szukaj
+        </button>
+    </form>
+
+    <!-- Tabela wizyt -->
+    <table id="visitsTable">
+        <thead>
+        <tr>
+            <th>Pacjent</th>
+            <th>Lekarz</th>
+            <th>Data Wizyty</th>
+            <th>Opcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="visit : ${visits}">
+            <td th:text="${visit.patient.firstName} + ' ' + ${visit.patient.lastName}">Pacjent</td>
+            <td th:text="${visit.doctor.firstName} + ' ' + ${visit.doctor.lastName}">Lekarz</td>
+            <td th:text="${visit.visitDate}">Data Wizyty</td>
+            <td><a th:href="@{/visits/{id}(id=${visit.id})}" class="details-button">
+                <i class="fas fa-info-circle"></i> Zobacz szczegóły
+            </a></td>
+
+        </tr>
+        <!-- Więcej wizyt -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Osadzony JavaScript -->
+<script>
+    // Funkcja searchVisit
+    function searchVisit() {
+        const searchInput = document.getElementById('search-input');
+        let keyword = searchInput.value.trim();  // Usuń spacje na początku i końcu
+
+        console.log("Funkcja searchVisit została wywołana");
+        console.log("Wartość wyszukiwania:", keyword);
+
+        // Jeśli pole wyszukiwania jest puste, pobierz pełną listę wizyt
+        let url = keyword ? `/visits/search?keyword=${keyword}` : '/visits/search';
+
+        // Wysyła żądanie AJAX do serwera
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Otrzymane dane:", data);
+
+                let tableBody = document.querySelector('table tbody');
+                tableBody.innerHTML = '';  // Wyczyść tabelę
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="4">Brak wyników</td></tr>';
+                } else {
+                    data.forEach(visit => {
+                        let row = `<tr>
+                            <td>${visit.patient.firstName} ${visit.patient.lastName}</td>
+                            <td>${visit.doctor.firstName} ${visit.doctor.lastName}</td>
+                            <td>${visit.visitDate}</td>
+                            <td><a href="/visits/${visit.id}" class="details-button">Zobacz szczegóły</a></td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            })
+            .catch(error => console.error('Błąd:', error));
+    }
+
+    // Nasłuchuje na zmiany w polu wyszukiwania po pełnym załadowaniu DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search-input');
+
+        if (searchInput) {
+            // Nasłuchuje na zmiany w polu tekstowym
+            searchInput.addEventListener('input', function () {
+                searchVisit();  // Wywołaj funkcję przy każdej zmianie w polu tekstowym
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

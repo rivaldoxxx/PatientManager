@@ -1,4 +1,8 @@
-package com.example.patientmanager.repository;
+package com.example.patientmanager.repositories;
 
-public class DoctorRepository {
+
+import com.example.patientmanager.entities.Doctor;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 }
